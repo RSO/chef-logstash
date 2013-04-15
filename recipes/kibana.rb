@@ -6,15 +6,15 @@ kibana_home = node['logstash']['kibana']['home']
 kibana_log_dir = node['logstash']['kibana']['log_dir']
 kibana_pid_dir = node['logstash']['kibana']['pid_dir']
 
-include_recipe "rbenv::default"
-include_recipe "rbenv::ruby_build"
+node.set['rbenv']['rubies'] = [ '1.9.3-p194' ]
+node.set['rbenv']['global'] = '1.9.3-p194'
 
-rbenv_ruby "1.9.3-p194" do
-  global true
-end
+include_recipe 'ruby_build'
+include_recipe 'rbenv::system'
 
-rbenv_gem "bundler" do
-  ruby_version "1.9.3-p194"
+rbenv_gem 'bundler' do
+  rbenv_version '1.9.3-p194'
+  action :install
 end
 
 if Chef::Config[:solo]
@@ -39,7 +39,7 @@ when "ruby"
     home "/home/kibana"
     shell "/bin/bash"
   end
-  
+
   node.set[:rbenv][:group_users] = [ "kibana" ]
 
   [ kibana_pid_dir, kibana_log_dir ].each do |dir|
@@ -57,13 +57,13 @@ when "ruby"
     group 'kibana'
     recursive true
   end
-  
+
   # for some annoying reason Gemfile.lock is shipped w/ kibana
   file "gemfile_lock" do
     path  "#{node['logstash']['kibana']['basedir']}/#{node['logstash']['kibana']['sha']}/Gemfile.lock"
     action :delete
   end
-  
+
   git "#{node['logstash']['kibana']['basedir']}/#{node['logstash']['kibana']['sha']}" do
     repository node['logstash']['kibana']['repo']
     branch "kibana-ruby"
@@ -76,7 +76,7 @@ when "ruby"
   link kibana_home do
     to "#{node['logstash']['kibana']['basedir']}/#{node['logstash']['kibana']['sha']}"
   end
-  
+
   template '/home/kibana/.bash_profile' do # let bash handle our env vars
     source 'kibana-bash_profile.erb'
     owner 'kibana'
@@ -108,7 +108,7 @@ when "ruby"
     owner 'kibana'
     mode 0755
   end
-  
+
   template "#{kibana_home}/kibana-daemon.rb" do
     source "kibana-daemon.rb.erb"
     owner 'kibana'
@@ -121,13 +121,13 @@ when "ruby"
     not_if { ::File.exists? "#{kibana_home}/Gemfile.lock" }
   end
 
-  
+
   service "kibana" do
     supports :status => true, :restart => true
     action [:enable, :start]
     subscribes :restart, [ "link[#{kibana_home}]", "template[#{kibana_home}/KibanaConfig.rb]", "template[#{kibana_home}/kibana-daemon.rb]" ]
   end
-    
+
   logrotate_app "kibana" do
     cookbook "logrotate"
     path "/var/log/kibana/kibana.output"
@@ -136,9 +136,9 @@ when "ruby"
     rotate 30
     create "644 kibana kibana"
   end
-  
+
 when "php"
-  
+
   include_recipe "apache2"
   include_recipe "apache2::mod_php5"
   include_recipe "php::module_curl"
