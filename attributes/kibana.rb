@@ -1,5 +1,5 @@
 default['logstash']['kibana']['repo'] = 'git://github.com/rashidkpc/Kibana.git'
-default['logstash']['kibana']['sha'] = '806d9b4d7a88b102777cca8ec3cb472f3eb7b5b1'
+default['logstash']['kibana']['sha'] = '7c62350d117ed1ddadca5078813bf782bfdd6873'
 default['logstash']['kibana']['apache_template'] = 'kibana.conf.erb'
 default['logstash']['kibana']['basedir'] = "#{node['logstash']['basedir']}/kibana"
 default['logstash']['kibana']['log_dir'] = '/var/log/kibana'
