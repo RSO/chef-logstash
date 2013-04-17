@@ -57,10 +57,6 @@ Attributes
 * `node['logstash']['create_account']` - create the account info from
   `user` and `group`; this is `true` by default. Disable it to use an
   existing account!
-* `node['logstash']['install_zeromq']` - Should this
-  recipe install zeromq packages?
-* `node['logstash']['zeromq_packages']` - zeromq_packages to install
-  if you use zeromq
 
 ## Agent
 
