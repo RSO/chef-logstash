@@ -17,15 +17,14 @@ rbenv_gem 'bundler' do
   action :install
 end
 
-if Chef::Config[:solo]
+if node['logstash']['elasticsearch_ip']
   es_server_ip = node['logstash']['elasticsearch_ip']
+elsif Chef::Config[:solo]
+  es_server_ip = '127.0.0.1'
 else
   es_server_results = search(:node, "roles:#{node['logstash']['elasticsearch_role']} AND chef_environment:#{node.chef_environment}")
-  unless es_server_results.empty?
-    es_server_ip = es_server_results[0]['ipaddress']
-  else
-    es_server_ip = node['logstash']['elasticsearch_ip'].empty? ? '127.0.0.1' : node['logstash']['elasticsearch_ip']
-  end
+
+  es_server_ip = es_server_results[0]['ipaddress'] if es_server_results
 end
 
 es_server_port = node['logstash']['elasticsearch_port'].empty? ? '9200' : node['logstash']['elasticsearch_port']
