@@ -91,6 +91,7 @@ when "ruby"
               :es_port => es_server_port,
               :server_name => node['logstash']['kibana']['server_name']
               )
+    notifies :restart, 'service[kibana]'
   end
 
   template "/etc/init.d/kibana" do
