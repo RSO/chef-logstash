@@ -10,7 +10,7 @@ version          "0.5.9"
   supports os
 end
 
-%w{ apache2 php build-essential git rbenv ruby_build runit python java ant logrotate rabbitmq yumrepo }.each do |ckbk|
+%w{ apache2 build-essential git rbenv ruby_build runit python java ant logrotate rabbitmq yumrepo }.each do |ckbk|
   depends ckbk
 end
 
