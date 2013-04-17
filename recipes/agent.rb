@@ -11,16 +11,15 @@ else
   patterns_dir = node['logstash']['basedir'] + '/' + node['logstash']['agent']['patterns_dir']
 end
 
-# check if running chef-solo.  If not, detect the logstash server/ip by role.  If I can't do that, fall back to using ['logstash']['agent']['server_ipaddress']
-if Chef::Config[:solo]
+if node['logstash']['agent']['server_ipaddress']
   logstash_server_ip = node['logstash']['agent']['server_ipaddress']
+elsif Chef::Config[:solo]
+  Chef::Log.error("No server ipaddress provided while running Chef Solo")
+  Chef::Application.fatal!("No server ipaddress provided while running Chef Solo")
 else
   logstash_server_results = search(:node, "roles:#{node['logstash']['agent']['server_role']}")
-  unless logstash_server_results.empty?
-    logstash_server_ip = logstash_server_results[0]['ipaddress']
-  else
-    logstash_server_ip = node['logstash']['agent']['server_ipaddress']
-  end
+
+  logstash_server_ip = logstash_server_results[0]['ipaddress'] unless logstash_server_results.empty?
 end
 
 directory "#{node['logstash']['basedir']}/agent" do
