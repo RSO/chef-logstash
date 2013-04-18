@@ -107,7 +107,6 @@ elsif platform_family? 'rhel','fedora'
     group 'root'
     mode 00774
     variables(:config_file => 'logstash.conf',
-              :name => 'server',
               :max_heap => node['logstash']['xmx'],
               :min_heap => node['logstash']['xms']
               )
