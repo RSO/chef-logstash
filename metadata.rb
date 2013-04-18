@@ -10,7 +10,7 @@ version          "0.5.9"
   supports os
 end
 
-%w{ apache2 build-essential git runit java ant logrotate yumrepo }.each do |ckbk|
+%w{ apache2 build-essential git runit java ant python logrotate yumrepo }.each do |ckbk|
   depends ckbk
 end
 
