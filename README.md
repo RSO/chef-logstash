@@ -29,7 +29,7 @@ Attributes
 
 ## Default
 
-* `node['logstash']['basedir']` - the base directory for all the
+* `node['logstash']['base_dir']` - the base directory for all the
   Logstash components
 * `node['logstash']['user']` - the owner for all Logstash components
 * `node['logstash']['group']` - the group for all Logstash components
@@ -93,7 +93,7 @@ Attributes
 * `node['logstash']['agent']['outputs']` - Array of output plugins
   configuration.
 * `node['logstash']['agent']['patterns_dir']` - The patterns directory
-  where pattern files will be generated. Relative to the basedir or
+  where pattern files will be generated. Relative to the base_dir or
   absolute.
 
 ## Server
@@ -132,7 +132,7 @@ Attributes
   configuration.
 * `node['logstash']['server']['patterns_dir']` - The patterns
   directory where pattern files will be generated. Relative to the
-  basedir or absolute.
+  base_dir or absolute.
 
 ## Kibana
 

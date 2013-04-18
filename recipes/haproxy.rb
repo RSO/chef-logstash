@@ -9,7 +9,7 @@
 
 include_recipe "logrotate"
 
-directory "#{node['logstash']['basedir']}/server/apache_logs" do
+directory "#{node['logstash']['base_dir']}/server/apache_logs" do
   action :create
   mode "0755"
   owner node['logstash']['user']
@@ -17,7 +17,7 @@ directory "#{node['logstash']['basedir']}/server/apache_logs" do
 end
 
 link "/var/lib/logstash/apache_logs" do
-  to "#{node['logstash']['basedir']}/server/apache_logs"
+  to "#{node['logstash']['base_dir']}/server/apache_logs"
 end
 
 directory "/opt/logstash/server/etc/patterns" do

@@ -9,9 +9,9 @@ include_recipe "logrotate"
 
 package 'git'
 
-basedir = node['logstash']['basedir'] + '/beaver'
+base_dir = node['logstash']['base_dir'] + '/beaver'
 
-conf_file = "#{basedir}/etc/beaver.conf"
+conf_file = "#{base_dir}/etc/beaver.conf"
 log_file = "#{node['logstash']['log_dir']}/logstash_beaver.log"
 pid_file = "#{node['logstash']['pid_dir']}/logstash_beaver.pid"
 
@@ -29,7 +29,7 @@ end
 
 
 # create some needed directories and files
-directory basedir do
+directory base_dir do
   owner node['logstash']['user']
   group node['logstash']['group']
   recursive true

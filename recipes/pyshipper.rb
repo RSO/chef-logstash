@@ -13,7 +13,7 @@ include_recipe "git"
 
 package "python-dev"
 
-git "#{node['logstash']['basedir']}/shipper" do
+git "#{node['logstash']['base_dir']}/shipper" do
   repository "git://github.com/lusis/logstash-shipper.git"
   reference "master"
   action :sync
