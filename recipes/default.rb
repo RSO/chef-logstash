@@ -54,8 +54,8 @@ if node['logstash']['install_method'] == 'jar'
     owner 'root'
     group 'root'
     mode 00755
-    source node['logstash']['server']['source_url']
-    checksum node['logstash']['server']['checksum']
+    source node['logstash']['source_url']
+    checksum node['logstash']['checksum']
     action :create_if_missing
   end
 
