@@ -5,8 +5,9 @@ default['logstash']['join_groups'] = []
 
 default['logstash']['source_url'] = 'http://logstash.objects.dreamhost.com/release/logstash-1.1.10-flatjar.jar'
 default['logstash']['checksum'] = 'c417e73ce136adb00fd9ace75b705c3ee353d8bb4f31e81ba121ce4955f2c32d'
+
 default['logstash']['default_directories'] = %w{etc lib tmp}
-default['logstash']['conf_dir'] = "#{node['logstash']['base_dir']}/etc/conf.d"
+default['logstash']['conf_dir'] = "/etc/logstash.d"
 default['logstash']['patterns_dir'] = "#{node['logstash']['base_dir']}/etc/patterns"
 default['logstash']['log_dir'] = '/var/log/logstash'
 default['logstash']['pid_dir'] = '/var/run/logstash'
