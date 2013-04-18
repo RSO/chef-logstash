@@ -1,4 +1,4 @@
-description "Logstash agent"
+description "Logstash"
 author "Chef"
 
 start on (filesystem and net-device-up)
@@ -13,10 +13,10 @@ setuid <%= node['logstash']['user'] %>
 script
   export LOGSTASH_HOME="<%= node['logstash']['base_dir'] %>"
   export HOME=$LOGSTASH_HOME
-  export GC_OPTS="<%= node['logstash']['agent']['gc_opts'] %>"
-  export JAVA_OPTS="-server -Xms<%= node['logstash']['agent']['xms'] %> -Xmx<%= node['logstash']['agent']['xmx'] %> -Djava.io.tmpdir=$LOGSTASH_HOME/tmp/ <%= node['logstash']['agent']['java_opts'] %> <%= '-Djava.net.preferIPv4Stack=true' if node['logstash']['agent']['ipv4_only'] %>"
+  export GC_OPTS="<%= node['logstash']['gc_opts'] %>"
+  export JAVA_OPTS="-server -Xms<%= node['logstash']['xms'] %> -Xmx<%= node['logstash']['xmx'] %> -Djava.io.tmpdir=$LOGSTASH_HOME/tmp/ <%= node['logstash']['java_opts'] %> <%= '-Djava.net.preferIPv4Stack=true' if node['logstash']['ipv4_only'] %>"
   export LOGSTASH_OPTS="agent -f <%= node['logstash']['conf_dir'] %> -l <%= node['logstash']['log_dir'] %>/logstash.log"
-  <% if node['logstash']['agent']['debug'] -%>
+  <% if node['logstash']['debug'] -%>
   export LOGSTASH_OPTS="$LOGSTASH_OPTS -vv"
   <% end -%>
   export OPTS="$JAVA_OPTS $GC_OPTS -jar $LOGSTASH_HOME/lib/logstash.jar $LOGSTASH_OPTS"
@@ -24,4 +24,4 @@ script
   exec /usr/bin/java $OPTS
 end script
 
-emits logstash-agent-running
+emits logstash-server-running
