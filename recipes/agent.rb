@@ -58,7 +58,7 @@ template "#{node['logstash']['conf_dir']}/shipper.conf" do
   mode 00644
   variables(
     :logstash_server_ip => logstash_server_ip,
-    :patterns_dir => patterns_dir
+    :patterns_dir => node['logstash']['patterns_dir']
   )
   notifies :restart, 'service[logstash_agent]'
 end

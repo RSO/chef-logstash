@@ -40,7 +40,7 @@ template "#{node['logstash']['conf_dir']}/logstash.conf" do
             :es_server_ip => es_server_ip,
             :enable_embedded_es => node['logstash']['server']['enable_embedded_es'],
             :es_cluster => node['logstash']['elasticsearch_cluster'],
-            :patterns_dir => patterns_dir)
+            :patterns_dir => node['logstash']['patterns_dir'])
   notifies :restart, 'service[logstash_server]'
   action :create
 end
