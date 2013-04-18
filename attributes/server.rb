@@ -12,7 +12,6 @@ default['logstash']['server']['gc_opts'] = '-XX:+UseParallelOldGC'
 default['logstash']['server']['ipv4_only'] = false
 default['logstash']['server']['debug'] = false
 default['logstash']['server']['home'] = '/opt/logstash/server'
-default['logstash']['server']['install_rabbitmq'] = true
 
 # roles/flags for various autoconfig/discovery components
 default['logstash']['server']['enable_embedded_es'] = true

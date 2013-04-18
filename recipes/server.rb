@@ -12,8 +12,6 @@
 include_recipe "logstash::default"
 include_recipe "logrotate"
 
-include_recipe "rabbitmq" if node['logstash']['server']['install_rabbitmq']
-
 if node['logstash']['server']['patterns_dir'][0] == '/'
   patterns_dir = node['logstash']['server']['patterns_dir']
 else
