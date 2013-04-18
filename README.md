@@ -252,9 +252,6 @@ Do something to generate a new line in any of the files in the agent's
 watch path (I like to SSH to the host), and the events will start
 showing up in kibana. You might have to issue a fresh empty search.
 
-The `pyshipper` recipe will work as well but it is NOT wired up to
-anything yet.
-
 ## Letting data drive your templates
 
 The current templates for the agent and server are written so that you
