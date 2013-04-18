@@ -10,6 +10,8 @@ default['logstash']['log_dir'] = '/var/log/logstash'
 default['logstash']['pid_dir'] = '/var/run/logstash'
 default['logstash']['create_account'] = true
 
+default['logstash']['install_method'] = 'jar'
+
 # roles/flags for various search/discovery
 default['logstash']['graphite_role'] = 'graphite_server'
 default['logstash']['graphite_query'] = "roles:#{node['logstash']['graphite_role']} AND chef_environment:#{node.chef_environment}"
