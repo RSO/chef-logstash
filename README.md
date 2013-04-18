@@ -92,7 +92,6 @@ Attributes
   configuration.
 * `node['logstash']['agent']['outputs']` - Array of output plugins
   configuration.
-* `node['logstash']['agent']['patterns_dir']` - The patterns directory
   where pattern files will be generated. Relative to the base_dir or
   absolute.
 
@@ -130,9 +129,6 @@ Attributes
   configuration.
 * `node['logstash']['server']['outputs']` - Array of output plugins
   configuration.
-* `node['logstash']['server']['patterns_dir']` - The patterns
-  directory where pattern files will be generated. Relative to the
-  base_dir or absolute.
 
 ## Kibana
 
