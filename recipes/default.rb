@@ -14,7 +14,6 @@ if node['logstash']['create_account']
 
   user node['logstash']['user'] do
     group node['logstash']['group']
-    home "/var/lib/logstash"
     system true
     action :create
     manage_home true
