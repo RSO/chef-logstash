@@ -62,8 +62,6 @@ Attributes
 
 * `node['logstash']['agent']['install_method']` - The method to
   install logstash - either `jar` or `source`, defaults to `jar`
-* `node['logstash']['agent']['version']` - The version of Logstash to
-  install. Only applies to `jar` install method.
 * `node['logstash']['agent']['source_url']` - The URL of the Logstash
   jar to download. Only applies to `jar` install method.
 * `node['logstash']['agent']['checksum']` - The checksum of the jar
@@ -99,8 +97,6 @@ Attributes
 
 * `node['logstash']['server']['install_method']` - The method to
   install logstash - either `jar` or `source`
-* `node['logstash']['server']['version']` - The version of Logstash to
-  install. Only applies to `jar` install method.
 * `node['logstash']['server']['source_url']` - The URL of the Logstash
   jar to download. Only applies to `jar` install method.
 * `node['logstash']['server']['checksum']` - The checksum of the jar
