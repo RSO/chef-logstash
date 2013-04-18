@@ -61,7 +61,7 @@ if node['logstash']['install_method'] == 'jar'
 
   link "#{node['logstash']['base_dir']}/lib/logstash.jar" do
     to "#{node['logstash']['base_dir']}/lib/logstash-#{node['logstash']['version']}.jar"
-    notifies :restart, 'service[logstash_server]'
+    notifies :restart, 'service[logstash]'
   end
 else
   include_recipe 'logstash::source'
@@ -69,7 +69,7 @@ else
   logstash_version = node['logstash']['source']['sha'] || "v#{node['logstash']['version']}"
   link "#{node['logstash']['base_dir']}/lib/logstash.jar" do
     to "#{node['logstash']['base_dir']}/source/build/logstash-#{logstash_version}-monolithic.jar"
-    notifies :restart, 'service[logstash_server]'
+    notifies :restart, 'service[logstash]'
   end
 end
 
@@ -81,7 +81,7 @@ node['logstash']['patterns'].each do |filename, hash|
     group node['logstash']['group']
     variables( :patterns => hash )
     mode 00644
-    notifies :restart, 'service[logstash_agent]'
+    notifies :restart, 'service[logstash]'
   end
 end
 

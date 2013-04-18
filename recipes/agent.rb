@@ -26,5 +26,5 @@ template "#{node['logstash']['conf_dir']}/shipper.conf" do
     :logstash_server_ip => logstash_server_ip,
     :patterns_dir => node['logstash']['patterns_dir']
   )
-  notifies :restart, 'service[logstash_agent]'
+  notifies :restart, 'service[logstash]'
 end
