@@ -31,15 +31,17 @@ node['logstash']['join_groups'].each do |grp|
 end
 
 # Setup default directory structure
+absolute_default_directories = node['logstash']['default_directories'].map {|dir| "#{node['logstash']['base_dir']}/#{dir}" }
+
 directories = [
     node['logstash']['base_dir'],
     node['logstash']['conf_dir'],
     node['logstash']['patterns_dir'],
     node['logstash']['log_dir']
-  ] + node['logstash']['default_directories']
+  ] + absolute_default_directories
 
 directories.each do |dir|
-  directory "#{node['logstash']['base_dir']}/#{dir}" do
+  directory dir do
     mode 07755
     owner node['logstash']['user']
     group node['logstash']['group']
