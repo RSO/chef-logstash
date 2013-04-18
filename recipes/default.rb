@@ -85,6 +85,40 @@ node['logstash']['patterns'].each do |filename, hash|
   end
 end
 
+# Setup service
+if platform_family? 'debian'
+  if node['platform_version'] == '12.04'
+    template '/etc/init/logstash.conf' do
+      mode 00644
+      source 'logstash.conf.erb'
+    end
+
+    service 'logstash' do
+      provider Chef::Provider::Service::Upstart
+      action [ :enable, :start ]
+    end
+  else
+    runit_service 'logstash'
+  end
+elsif platform_family? 'rhel','fedora'
+  template '/etc/init.d/logstash' do
+    source 'init.erb'
+    owner 'root'
+    group 'root'
+    mode 00774
+    variables(:config_file => 'logstash.conf',
+              :name => 'server',
+              :max_heap => node['logstash']['xmx'],
+              :min_heap => node['logstash']['xms']
+              )
+  end
+
+  service 'logstash' do
+    supports :restart => true, :reload => true, :status => true
+    action [:enable, :start]
+  end
+end
+
 # Setup logrotate
 logrotate_app 'logstash' do
   path "#{node['logstash']['log_dir']}/*.log"

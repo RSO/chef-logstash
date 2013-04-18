@@ -11,6 +11,13 @@ default['logstash']['pid_dir'] = '/var/run/logstash'
 default['logstash']['create_account'] = true
 
 default['logstash']['install_method'] = 'jar'
+default['logstash']['version'] = '1.1.10'
+default['logstash']['xms'] = '384M'
+default['logstash']['xmx'] = '384M'
+default['logstash']['java_opts'] = ''
+default['logstash']['gc_opts'] = '-XX:+UseParallelOldGC'
+default['logstash']['ipv4_only'] = false
+default['logstash']['debug'] = false
 
 # roles/flags for various search/discovery
 default['logstash']['graphite_role'] = 'graphite_server'

@@ -44,37 +44,3 @@ template "#{node['logstash']['conf_dir']}/logstash.conf" do
   notifies :restart, 'service[logstash_server]'
   action :create
 end
-
-if platform_family? 'debian'
-  if node['platform_version'] == '12.04'
-    template '/etc/init/logstash_server.conf' do
-      mode 00644
-      source 'logstash_server.conf.erb'
-    end
-
-    service 'logstash_server' do
-      provider Chef::Provider::Service::Upstart
-      action [ :enable, :start ]
-    end
-  else
-    runit_service 'logstash_server'
-  end
-elsif platform_family? 'rhel','fedora'
-  template '/etc/init.d/logstash_server' do
-    source 'init.erb'
-    owner 'root'
-    group 'root'
-    mode 00774
-    variables(:config_file => 'logstash.conf',
-              :name => 'server',
-              :max_heap => node['logstash']['server']['xmx'],
-              :min_heap => node['logstash']['server']['xms']
-              )
-  end
-
-  service 'logstash_server' do
-    supports :restart => true, :reload => true, :status => true
-    action [:enable, :start]
-  end
-end
-
