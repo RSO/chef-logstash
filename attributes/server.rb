@@ -11,7 +11,6 @@ default['logstash']['server']['inputs'] = [{
     :format => 'json_event'
   }
 }]
-default['logstash']['server']['filters'] = []
 default['logstash']['server']['outputs'] = []
 
 

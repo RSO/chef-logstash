@@ -2,12 +2,6 @@ input {
   <%= LogstashConf.section_to_str(node['logstash']['server']['inputs']) %>
 }
 
-<% unless node['logstash']['server']['filters'].empty? -%>
-filter {
-  <%= LogstashConf.section_to_str(node['logstash']['server']['filters'], node['logstash']['server']['version'], @patterns_dir) %>
-}
-<% end -%>
-
 output {
   <% if node['logstash']['server']['debug'] -%>
   stdout { debug => true debug_format => "json" }
