@@ -1,13 +1,5 @@
 input {
-  <% if node['logstash']['server']['inputs'].empty? -%>
-  tcp {
-    type => "tcp-input"
-    port => "5959"
-    format => "json_event"
-  }
-  <% else -%>
-    <%= LogstashConf.section_to_str(node['logstash']['server']['inputs']) %>
-  <% end -%>
+  <%= LogstashConf.section_to_str(node['logstash']['server']['inputs']) %>
 }
 
 <% unless node['logstash']['server']['filters'].empty? -%>
