@@ -1,8 +1,4 @@
-
-require 'rubygems'
-
 class Erubis::RubyEvaluator::LogstashConf
-
   private
 
   def self.key_to_str(k)
@@ -41,7 +37,7 @@ class Erubis::RubyEvaluator::LogstashConf
   end
 
   public
-  
+
   def self.section_to_str(section, version=nil, patterns_dir=nil)
     result = []
     patterns_dir_plugins = [ 'grok' ]
