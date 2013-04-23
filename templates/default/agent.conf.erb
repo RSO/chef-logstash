@@ -14,12 +14,6 @@ input {
   <% end -%>
 }
 
-<% unless node['logstash']['agent']['filters'].empty? -%>
-filter {
-  <%= LogstashConf.section_to_str(node['logstash']['agent']['filters'], node['logstash']['agent']['version'], @patterns_dir) %>
-}
-<% end -%>
-
 output {
   <% if node['logstash']['agent']['debug'] -%>
   stdout { }
