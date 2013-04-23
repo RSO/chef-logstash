@@ -60,7 +60,7 @@ class Erubis::RubyEvaluator::LogstashConf
     return result.join("\n")
   end
 
-  def self.render_output_for(node)
+  def self.render_agent_output_for(node)
     outputs = node['logstash']['agent']['outputs']
     output_str = "output {\n"
 
