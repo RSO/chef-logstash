@@ -59,35 +59,4 @@ class Erubis::RubyEvaluator::LogstashConf
     end
     return result.join("\n")
   end
-
-  def self.render_agent_output_for(node)
-    outputs = node['logstash']['agent']['outputs']
-    output_str = "output {\n"
-
-    if outputs.empty?
-      if @logstash_server_ip.empty?
-        outputs << {
-          :null => {}
-        }
-      else
-        outputs << {
-          :tcp => {
-            :host => "#{@logstash_server_ip}",
-            :port => "5959"
-          }
-        }
-      end
-    end
-
-    if node['logstash']['debug']
-      outputs << {
-        :stdout => {}
-      }
-    end
-
-    output_str << section_to_str(outputs)
-    output_str << "\n}"
-
-    output_str
-  end
 end
