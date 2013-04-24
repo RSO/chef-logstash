@@ -2,14 +2,7 @@
 # by Chef
 # Manual changes will be lost
 input {
-  <% if node['logstash']['agent']['inputs'].empty? -%>
-  file {
-    type => "sample-logs"
-    path => ["/var/log/*.log"]
-    exclude => ["*.gz"]
-    debug => true
-  }
-  <% else %>
+  <% unless node['logstash']['agent']['inputs'].empty? -%>
     <%= LogstashConf.section_to_str(node['logstash']['agent']['inputs']) %>
   <% end -%>
 }
